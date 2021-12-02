@@ -1,0 +1,23 @@
+/*runoob practice-38
+https://m.runoob.com/cprogramming/c-exercise-example38.html
+*/
+#include <stdio.h>
+int main() {
+    /*输入一个3*3矩阵，求对角线元素之和*/
+
+    int i, j, a[3][3];
+    int sum = 0;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            scanf("%d", &a[i][j]); // 说明是横着放
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        printf("%d", a[i][i]);
+        sum = sum + a[i][i];
+    }
+
+
+    printf("%d", sum);
+    return 0;
+}
