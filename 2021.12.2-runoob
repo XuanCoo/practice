@@ -1,4 +1,5 @@
-/*runoob practice-38
+/*
+runoob practice-38
 https://m.runoob.com/cprogramming/c-exercise-example38.html
 */
 #include <stdio.h>
@@ -21,3 +22,16 @@ int main() {
     printf("%d", sum);
     return 0;
 }
+
+
+
+
+
+
+
+/*
+runoob practice-38
+https://m.runoob.com/cprogramming/c-exercise-example38.html
+*/
+
+
