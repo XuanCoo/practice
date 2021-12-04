@@ -1,3 +1,4 @@
+****************************************************************************************************************
 /*
 location:https://m.runoob.com/cprogramming/c-exercise-example28.html
     
@@ -25,6 +26,7 @@ int main()
 {
     printf("%d",age(5));
 }
+****************************************************************************************************************
 
 
 
@@ -35,8 +37,7 @@ int main()
 
 
 
-
-
+****************************************************************************************************************
 
 /*
 location:https://m.runoob.com/cprogramming/c-exercise-example35.html
@@ -83,6 +84,7 @@ int main()
     printf("%s",s);
 }
 
+****************************************************************************************************************
 
 
 
@@ -90,8 +92,7 @@ int main()
 
 
 
-
-
+****************************************************************************************************************
 /*
 location:https://m.runoob.com/cprogramming/c-exercise-example36.html
     
@@ -128,4 +129,175 @@ int main()
 
     }
 }
+****************************************************************************************************************
 
+
+
+
+（CS一节课的HW)前两天写的
+****************************************************************************************************************
+import random
+
+'''
+读取数据一个数组
+'''
+total_list = []
+with open(r'C:\Users\xuanz\Desktop\s-k-20-35.txt','r') as f:
+    data = f.readlines()
+
+    for line in data:
+        number = line.split()
+        number2 = list(map(int,number))
+        total_list.append(number2)
+
+random.shuffle(total_list)
+'''
+获取大数据的数据
+（此时尚未确定最大数字）
+total_num_amount: 记录没一个数字出现次数，index是目标数字，值是出现次数，当值为0的时候，表明尚未出现
+length_record: 记录每一个数组的长度，后续步骤会从最小数组开始判断
+
+'''
+total_num_amount = [0]*36 # 总数字量，此时的36是我用眼珠子看的，也就是最大数字35
+length_record = [0]*(len(total_list)) # 记录每一个数组的长度，0表示第一个数组，1表示第二个数组
+current_index = 0 # 记录当前读取到的index
+for item in total_list:
+    for j in item:
+        total_num_amount[j] = total_num_amount[j]+1
+    length_record[current_index] = len(item)
+    current_index = current_index + 1
+
+# # **验证是否可行
+# print(total_num_amount)
+# print(length_record)
+
+
+'''
+操作数据：
+方法： 
+    设置验证长度为1的数组
+    遍历length_record,寻找相同数字
+    如果相同，获得这个值的index，对应到total_list的位置
+    对total_list中index地方数组操作：
+        遍历这个index的数组，设为i
+        如果position-i在total_num_amount 存在一个值为1，说明这个是核心数组
+        改变length record中核心数组的值为-1
+        如果position-i在total_num_amount 的所有值都不为1，说明这个是可替代数组
+        改变length record中次数组的长度为0，说明无效
+        并且删除此数组贡献给total_num_amount的值
+
+    最总返还一个length_record, 其中如果值为-1，说明为核心数组，记录-1的数量
+'''
+
+
+# 用眼珠子看出，最长数组的长度是 5
+
+for i in [1,5]: # 从长度1的数组开始判断
+    current_index = 0
+    for length in length_record:
+        if i == length:
+            # todo: 判断此数组内的数字是否为1
+            IsImportant = 0 # 如果为1， 说明这个是核心数组
+            for item in total_list[current_index]:
+                if (total_num_amount[item] == 1):
+                    IsImportant = 1
+
+            if IsImportant == 1: # 核心数组操作
+                length_record[current_index] = -1
+            elif IsImportant ==0: # 可替代数组操作
+                length_record[current_index] = 0
+                for item in total_list[current_index]:
+                    total_num_amount[item] = total_num_amount[item] - 1
+        current_index = current_index + 1
+
+print(length_record)
+current_index = 0
+cu = 0
+for i in length_record:
+    if i==-1:
+        print(total_list[current_index])
+        cu = cu + 1
+    current_index = current_index + 1
+print(cu)
+****************************************************************************************************************
+
+
+
+****************************************************************************************************************
+problem!!!!!!!!!!!!!!!!!!!!!!!!!!
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example37.html
+    
+title:
+    
+    
+problem:
+    
+
+*/
+
+#include<stdio.h>
+
+/*
+设计一个函数重新排序一个数组
+
+输入一个数组的地址，然后进行操作
+*/
+
+void sortList(int* a)
+{
+    /*
+    sort the list by consistent move
+    
+    
+    
+    */
+    
+    // get len of list
+    int len = 0;
+    int* s = a;
+    // printf("%p\n",s);
+    // printf("%p\n",a);
+
+     while (*s != '\0')
+     {
+         len++;
+         *s++;
+     }
+    len--;
+
+    for (int i = 0; i<= len-1; i++)
+    {
+        for (int j = i; j <= len-2; j++)
+        {
+            if (*(a+j)>*(a+j+1))
+            {
+                int c;
+                c = *(a+j);
+                *(a+j) = *(a+j+1);
+                *(a+j+1) = c;
+            }
+        }
+    }
+
+}
+
+
+int main()
+{
+    int a[] = {1,2,6,4};
+    sortList(a);
+    
+    for (int i = 0; i<= 3; i++)
+    {
+        printf("%d\n",a[i]);
+    }
+}
+
+
+****************************************************************************************************************
+****************************************************************************************************************
+****************************************************************************************************************
+****************************************************************************************************************
+****************************************************************************************************************
+****************************************************************************************************************
