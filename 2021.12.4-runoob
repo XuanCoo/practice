@@ -49,20 +49,22 @@ int main()
 }
 ************************************************************************************************
 
-
 #include <stdio.h>
 #include <stdlib.h> // Standard library functions import
 
 // define global variable
 #define OK 1
 #define ERROR 0
-#define OVERFLOW -2
+#define OVERFLOW -2 // define some speical number's meaning
 typedef int Status;
 //============chain stack================
 /*why def this int type:
 when we want to revise the int to char, we can 
 revise only one position, not revise many position
-which mean we link the same type together*/
+which mean we link the same type together
+
+benefit: only revise the head file,we can use this to char or othter type
+*/
 typedef int SElemType; 
 
 typedef struct node 
@@ -86,6 +88,7 @@ Status Push(LinkStackNode *top,SElemType x){
     if (!p) return ERROR; /*fail to request space, and stop run here*/
     p->data = x;
     p->next = top->next; // ?????????why do this?
+    // answer insert a element in the stack
     top->next = p;
     return OK;
 }
@@ -93,6 +96,7 @@ Status Push(LinkStackNode *top,SElemType x){
 Status Pop(LinkStackNode*top, SElemType *x)
 {   /* pop the top element of stack, and store data into x*/
     LinkStackNode *p; // initize the pointer alone, and store the localtion
+    // why we donot malloc a new memory -> we have a memory, this time, we just to use it.
     p = top->next;
     if (p == NULL)  return OVERFLOW;
     // ??????if there is only one? no line to other ?
@@ -101,6 +105,104 @@ Status Pop(LinkStackNode*top, SElemType *x)
     *x = p->data;
     free(p);
     return OK;
+}
+************************************************************************************************
+
+
+
+
+
+
+************************rewrite by myself****************************
+==========need improve===================
+/* make a chain stack from the scratch
+	time: 2021.12.4
+	author: XuanCoodx
+*/
+
+
+
+//===========structure===============
+/*
+step:
+1. initialize the chain (make the top of chain)
+
+2. make the body of a chain
+
+3. push element into a chain
+
+4. pop element out of a chain
+
+
+def:
+three special number:
+	1. WRONG: -1
+	2. OK:	0
+	3. OVERFLOW: -2
+	
+struct node:
+	1. data
+	2. pointor
+*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define OK 0
+#define WRONG -1
+#define OVERFLOW -2
+
+typedef int SElement;
+
+typedef struct node{
+	SElement data;
+	struct node *next;
+}LinkNode;
+
+// ==============initialize the chain=============
+void Initialize(LinkNode *top){
+	// malloc a memory for top
+	top = (LinkNode*)malloc(sizeof(LinkNode));
+	top -> next = NULL;
+	
+}
+
+
+//=============push a element in to the chain==============
+static push(LinkNode* top, SElement x){
+	// make a memory for this element
+	LinkNode *p;
+	p = (LinkNode*)malloc(sizeof(LinkNode));
+	p->data = x;
+	p->next = top->next;
+	top->next = p;
+//	free(p); // lol, how can I free this thing, fuck you, if free there will be no fucking memeory.
+	return OK;
+}
+//=============pop a element in to the chain==============
+static pop(LinkNode* top, SElement* x){
+	LinkNode *p;
+	p = top->next;
+	top->next = p->next;
+	*x = p->data;
+	return OK;
+}
+
+int main(){
+	LinkNode top;
+	Initialize(&top);
+	
+	int a,b;
+	int store;
+	for (a = 0; a<=5; a++){
+		push(&top,a);
+		printf("%d\n",a);
+	} 
+	for (b = 5; b>=0; b--){
+		pop(&top,&store);
+		printf("%d\n", store);
+	} 
 }
 
 int main(){
@@ -118,5 +220,10 @@ int main(){
     }
     // system("pause");
 }
+************************************************************************************************
+
+************************************************************************************************
+************************************************************************************************
+
 
 
