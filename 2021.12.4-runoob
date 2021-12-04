@@ -1,0 +1,122 @@
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example41.html
+
+
+title: static
+    
+    
+problem:
+    
+*/
+
+#include<stdio.h>
+
+/*
+设计一个函数重新排序一个数组
+
+输入一个数组的地址，然后进行操作
+*/
+
+void fun()
+{
+    int i = 0;
+    static int static_i = 0;
+    printf("i=%d\n",i);
+    printf("static_i=%d\n",static_i);
+    i++;
+    static_i++;
+}
+
+void fun2()
+{
+    int i = 0;
+    static int static_i = 0;
+    printf("i=%d\n",i);
+    printf("static_i=%d\n",static_i);
+    i++;
+    static_i++;
+}
+
+int main()
+{
+    void fun();
+    for (int i = 0; i<=3; i++)
+    {
+        fun();
+        fun2();
+    }
+}
+************************************************************************************************
+
+
+#include <stdio.h>
+#include <stdlib.h> // Standard library functions import
+
+// define global variable
+#define OK 1
+#define ERROR 0
+#define OVERFLOW -2
+typedef int Status;
+//============chain stack================
+/*why def this int type:
+when we want to revise the int to char, we can 
+revise only one position, not revise many position
+which mean we link the same type together*/
+typedef int SElemType; 
+
+typedef struct node 
+{
+    SElemType data;
+    struct node *next;
+}LinkStackNode; // 
+//============chain stack initialization==========
+void InitStack(LinkStackNode* top)
+{
+    /*creat the top of a chain stack*/
+    top = (LinkStackNode*)malloc(sizeof(LinkStackNode));
+    // ??? how malloc work
+    top->next = NULL;
+}
+//==============push into the stack=============
+Status Push(LinkStackNode *top,SElemType x){
+    /*push the data into the stack*/
+    LinkStackNode *p; // this means top and link is different
+    p = (LinkStackNode*)malloc(sizeof(LinkStackNode));
+    if (!p) return ERROR; /*fail to request space, and stop run here*/
+    p->data = x;
+    p->next = top->next; // ?????????why do this?
+    top->next = p;
+    return OK;
+}
+//==============Pop=============
+Status Pop(LinkStackNode*top, SElemType *x)
+{   /* pop the top element of stack, and store data into x*/
+    LinkStackNode *p; // initize the pointer alone, and store the localtion
+    p = top->next;
+    if (p == NULL)  return OVERFLOW;
+    // ??????if there is only one? no line to other ?
+    // =NULL  means there is no location??? 
+    top -> next = p ->next;
+    *x = p->data;
+    free(p);
+    return OK;
+}
+
+int main(){
+    LinkStackNode top;
+    InitStack(&top);
+    SElemType e;
+    int i,j;
+    for (i=5;i>0;i--){
+        Push(&top,i);
+        printf("the push is %d\n",i);
+    }
+    for (j=5; j>0;j--){
+        Pop(&top,&e);
+        printf("the pop is %d\n",e);
+    }
+    // system("pause");
+}
+
+
