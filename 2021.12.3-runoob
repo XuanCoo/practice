@@ -1,0 +1,131 @@
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example28.html
+    
+    
+title:
+    
+    
+problem:
+    
+
+*/
+
+
+
+#include <stdio.h>
+int age(int n)
+{
+    int c;
+    if(n==1) c=10;
+    else c=age(n-1)+2;
+    return c;
+}
+
+int main()
+{
+    printf("%d",age(5));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example35.html
+    
+title:
+    
+    
+problem: use printor
+
+
+    
+
+*/
+
+#include<stdio.h>
+
+void reverse(char* s)
+{
+    // get a printor of char
+    int len = 0;
+    char* p = s; //give p the location
+    while (*p != 0)
+    {
+        len++;
+        p++;
+    }
+    
+    int i = 0;
+    char c;//中间体
+    while (i <= len / 2 - 1) // -1 > the index = len - 1
+    {
+        c = *(s+i);
+        *(s+i) = *(s+len-1-i);
+        *(s+len-1-i) = c;
+        i++;
+    }
+}
+
+int main()
+{
+    char s[] = "abcd";
+    reverse(s);
+    
+    printf("%s",s);
+}
+
+
+
+
+
+
+
+
+
+
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example36.html
+    
+    
+title:
+    
+    
+problem:
+    
+
+*/
+
+#include<stdio.h>
+
+
+int main()
+{
+    // 输出1-100的质数
+    int flag;
+    for (int i = 2; i<=100; i++)
+    {
+        flag = 1;
+        for (int p = 2; p < i/2; p++)
+        {
+            if (i!=p){
+                if (i%p ==0){
+                    flag = 0;
+                    break;
+                    
+                }
+            }
+        }
+                    if (flag == 1) printf("%d\n", i);
+
+    }
+}
+
