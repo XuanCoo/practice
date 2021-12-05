@@ -221,9 +221,286 @@ int main(){
     // system("pause");
 }
 ************************************************************************************************
+=====================what is auto????======================
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example42.html
+    
+    
+title: use auto to define var
+    
+    
+problem:
+    
+
+*/
+
+#include <stdio.h>
+
+int main()
+{
+	int i, num;
+	num =2;
+	for (i=0;i<3;i++)
+	{
+		printf("num = %d\n", num);
+		num++;
+		{
+			auto int num = 1;
+			printf("auto num = %d\n", num);
+			num++;
+		}
+	}
+} 
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example43.html
+    
+title: 
+    
+    
+problem:
+    
+
+*/
+
+#include <stdio.h>
+
+int main()
+{
+	int i,num;
+	num = 2;
+	for (i=0;i<3;i++)
+	{
+		printf("n = %d\n",num);
+		num++;
+		printf("%p\n",&num);
+		{
+			static int num=1;
+			printf("static n = %d\n",num);
+			printf("%p\n",&num);
+
+			num++;
+		}
+	}
+} 
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example44.html
+
+
+title: 
+    
+    
+problem:
+    
+
+*/
+
+#include <stdio.h>
+
+int a,b,c;
+
+void add()
+{
+	c = a+b;
+}
+
+int main()
+{
+	a = 1;
+	b = 2;
+	c = 0;
+	printf("c = %d\n",c);
+	add();
+	printf("c = %d\n",c);
+
+}
+
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example45.html
+
+
+title: 
+    
+    
+problem:
+    
+
+*/
+
+#include <stdio.h>
+
+
+
+int main()
+{
+	register int i;
+	int tmp = 0;
+	for (i=0;i<=100;i++)
+	{
+		tmp+=i;
+	}
+	printf("%d\n",tmp);
+	return 0;
+}
+
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example46.html
+
+
+title:  how to use define
+    
+    
+problem:
+    
+
+*/
+#include <stdio.h>
+#define TRUE 1
+#define FALSE 0
+#define SQ(x) x = x*x
+
+int main()
+{
+	int x = 2;
+	SQ(x);
+	printf("%d",x);
+}
+
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example47.html
+
+
+title:  how to use define
+    
+    
+problem:
+    
+
+*/
+#include <stdio.h>
+#define exchange(a,b) {int t;t=a;a=b;b=t;}
+
+int main()
+{
+	int a = 1;
+	int b = 2;
+	exchange(a,b);
+	printf("a=%d,b=%d",a,b);
+}
+
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example47.html
+
+
+title:  how to use define
+    
+    
+problem:
+    
+
+*/
+#include <stdio.h>
+#define LAG >
+#define SMA <
+#define EQ ==
+
+int main()
+{
+	int i,j;
+	i = 11;
+	j = 2;
+	
+	if (i LAG j)
+	{
+		printf("larger");
+	}
+}
+
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example47.html
+
+
+title:  how to use define
+    
+    
+problem:
+*/
+#include <stdio.h>
+#define LAG >
+#define SMA <
+#define EQ ==
+
+#undef EQ
+
+#ifndef EQ
+	#define EQ ==
+#endif
+
+#define NB\
+	printf("nb\n");\
+	printf("zhen nb")
+
+#define MAX(x,y) ((x)>(y)? (x):(y))
+
+int main()
+{
+	int i,j;
+	i = 11;
+	j = 121;
+//	printf("%d",EQ);
+	if (i EQ j)
+	{
+		printf("larger");
+	}
+	NB;
+	int max = MAX(i,j);
+	printf("%d\n",max);
+	printf("%s",__DATE__);
+}
+
+
+************************************************************************************************
+/*
+location:https://m.runoob.com/cprogramming/c-exercise-example47.html
+
+
+title:  how to use define
+    
+    
+problem:
+    
+
+*/
+#include <stdio.h>
+#define MAX
+#define MAXIMUM(x,y) (x>y)? x:y
+#define MINIMUM(x,y) (x>y)? y:x
+int main()
+{
+	int a=10,b=20;
+	#ifdef MAX
+		printf("ifdef MAX\n");
+	#else
+		printf("else\n");
+	#endif
+}
+
 
 ************************************************************************************************
 ************************************************************************************************
-
-
+************************************************************************************************
+************************************************************************************************
+************************************************************************************************
 
