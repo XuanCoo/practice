@@ -1,0 +1,57 @@
+/*
+from book "算法竞赛入门经典"
+page 48, 例题3-3
+
+question:20	10	C:\Users\xuanz\Documents\Untitled1.cpp	[Error] invalid conversion from 'const char*' to 'char' [-fpermissive]
+
+*/
+
+
+#include <stdio.h>
+#include <string.h>
+const char* mir = "AAE3HHIIJLLJMMOOS2TTUUVVWWZ5112S3E5Z88";
+/*ODD = GOAL, EVEN = RESULT*/
+ 
+const char* msg[] = {"is not a palindrome", "is a regular palindrome", "is a mirrored string", "is a mirrored palindrome"};
+
+char return_right(char x)
+{
+	char *p;
+
+	for (int i = 0; i< sizeof(mir); i=i+2)
+	{
+		if (x == mir[i]) 
+		{
+		char p = mir[i+1];
+		return p;
+		}
+	}
+		return "-";
+}
+
+int main()
+{
+	char goal[30];
+	
+	while (scanf("%s",goal) == 1)
+	{
+		int sign1, sign2 = 1;
+		int lens = strlen(goal);
+		for (int i = 0; i <=lens/2;i++)
+		{
+			/*judge palindrome*/
+			if (goal[i] != goal[lens-1-i]) sign1 = 0;
+			char p = return_right(goal[i]);
+			if (p=='-')
+			{
+				sign2 = 0;
+			}else{
+			if (p != goal[lens-1-i])	sign2 = 0;
+			}
+			
+		}
+		
+		printf("%s -- is %s.",goal, msg[2*sign1+sign2]);
+		
+	}
+ } 
